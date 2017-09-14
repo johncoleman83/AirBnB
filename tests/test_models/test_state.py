@@ -6,12 +6,13 @@ from datetime import datetime
 import inspect
 import json
 import models
-import os
+from os import environ, stat
+import pep8
 import unittest
 
 State = models.state.State
 BaseModel = models.base_model.BaseModel
-STORAGE_TYPE = os.environ.get('HBNB_TYPE_STORAGE')
+STORAGE_TYPE = environ.get('BTCPBNB_TYPE_STORAGE')
 
 
 class TestStateDocs(unittest.TestCase):
@@ -43,6 +44,19 @@ class TestStateDocs(unittest.TestCase):
         all_functions = TestStateDocs.all_funcs
         for function in all_functions:
             self.assertIsNotNone(function[1].__doc__)
+
+    def test_pep8_state(self):
+        """... state.py conforms to PEP8 Style"""
+        pep8style = pep8.StyleGuide(quiet=True)
+        errors = pep8style.check_files(['models/state.py'])
+        self.assertEqual(errors.total_errors, 0, errors.messages)
+
+    def test_file_is_executable(self):
+        """... tests if file has correct permissions so user can execute"""
+        file_stat = stat('models/state.py')
+        permissions = str(oct(file_stat[0]))
+        actual = int(permissions[5:-2]) >= 5
+        self.assertTrue(actual)
 
 
 class TestStateInstances(unittest.TestCase):

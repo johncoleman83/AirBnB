@@ -6,11 +6,12 @@ from datetime import datetime
 import inspect
 import json
 import models
-import os
+from os import environ, stat
+import pep8
 import unittest
 
 BaseModel = models.base_model.BaseModel
-STORAGE_TYPE = os.environ.get('HBNB_TYPE_STORAGE')
+STORAGE_TYPE = environ.get('BTCPBNB_TYPE_STORAGE')
 
 
 class TestBaseModelDocs(unittest.TestCase):
@@ -43,6 +44,19 @@ class TestBaseModelDocs(unittest.TestCase):
         all_functions = TestBaseModelDocs.all_funcs
         for function in all_functions:
             self.assertIsNotNone(function[1].__doc__)
+
+    def test_pep8_base_model(self):
+        """... base_model.py conforms to PEP8 Style"""
+        pep8style = pep8.StyleGuide(quiet=True)
+        errors = pep8style.check_files(['models/base_model.py'])
+        self.assertEqual(errors.total_errors, 0, errors.messages)
+
+    def test_file_is_executable(self):
+        """... tests if file has correct permissions so user can execute"""
+        file_stat = stat('models/base_model.py')
+        permissions = str(oct(file_stat[0]))
+        actual = int(permissions[5:-2]) >= 5
+        self.assertTrue(actual)
 
 
 @unittest.skipIf(STORAGE_TYPE == 'db', 'DB Storage does not store BaseModel')
@@ -120,9 +134,9 @@ class TestBaseModelInstances(unittest.TestCase):
 
     def test_name_attribute(self):
         """... add name attribute"""
-        self.model.name = "Holberton"
+        self.model.name = "Bootcamp"
         actual = self.model.name
-        expected = "Holberton"
+        expected = "Bootcamp"
         self.assertEqual(expected, actual)
 
     def test_number_attribute(self):

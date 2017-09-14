@@ -6,12 +6,12 @@ import unittest
 from datetime import datetime
 from models import *
 import inspect
-import os
+from os import environ, stat
+import pep8
 from models.base_model import Base
 from models.engine.db_storage import DBStorage
 
-
-STORAGE_TYPE = os.environ.get('HBNB_TYPE_STORAGE')
+STORAGE_TYPE = environ.get('BTCPBNB_TYPE_STORAGE')
 
 
 @unittest.skipIf(STORAGE_TYPE != 'db', 'skip if environ is not db')
@@ -49,6 +49,19 @@ class TestDBStorageDocs(unittest.TestCase):
         all_functions = TestDBStorageDocs.all_funcs
         for function in all_functions:
             self.assertIsNotNone(function[1].__doc__)
+
+    def test_pep8_db(self):
+        """... db_storage.py conforms to PEP8 Style"""
+        pep8style = pep8.StyleGuide(quiet=True)
+        errors = pep8style.check_files(['models/engine/db_storage.py'])
+        self.assertEqual(errors.total_errors, 0, errors.messages)
+
+    def test_file_is_executable(self):
+        """... tests if file has correct permissions so user can execute"""
+        file_stat = stat('models/engine/db_storage.py')
+        permissions = str(oct(file_stat[0]))
+        actual = int(permissions[5:-2]) >= 5
+        self.assertTrue(actual)
 
 
 @unittest.skipIf(STORAGE_TYPE != 'db', "DB Storage doesn't use FileStorage")
@@ -389,7 +402,7 @@ class TestCountGet(unittest.TestCase):
         cls.s = State(name="California")
         cls.c = City(state_id=cls.s.id,
                      name="San Francisco")
-        cls.u = User(email="betty@holbertonschool.com",
+        cls.u = User(email="betty@bootcampschool.com",
                      password="pwd")
         cls.p1 = Place(user_id=cls.u.id,
                        city_id=cls.c.id,
