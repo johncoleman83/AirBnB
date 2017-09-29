@@ -5,8 +5,7 @@ function remove (array, element) {
   }
 }
 
-const checkedItems = [];
-$(document).ready(function () {
+function amenCheck () {
   let allAmenInputs = $('.amenities INPUT');
   allAmenInputs.each(function () {
     $(this).change(function () {
@@ -21,4 +20,7 @@ $(document).ready(function () {
       }
     });
   });
-});
+}
+
+const checkedItems = [];
+$(document).ready(amenCheck);
