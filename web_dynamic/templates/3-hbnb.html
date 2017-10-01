@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<HTML lang="en">
+  <HEAD>
 
     <!-- HEAD -->
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <META charset="utf-8">
+    <META name="viewport" content="width=device-width">
     <title>Holberton AirBnB</title>
 
     <!-- FAVICON -->
 
-    <link
+    <LINK
       rel="shortcut icon"
       href="{{ url_for('static',
 	    filename='images/icon.png') }}?{{ cache_id }}">
@@ -28,63 +28,63 @@
 	 CSS styles
 	 ********************** -->
 
-    <link
+    <LINK
       rel="stylesheet"
       href="{{ url_for('static',
 	    filename='styles/4-common.css') }}?{{ cache_id }}">
-    <link
+    <LINK
       rel="stylesheet"
       href="{{ url_for('static',
 	    filename='styles/3-header.css') }}?{{ cache_id }}">
-    <link
+    <LINK
       rel="stylesheet"
       href="{{ url_for('static',
 	    filename='styles/3-footer.css') }}?{{ cache_id }}">
-    <link
+    <LINK
       rel="stylesheet"
       href="{{ url_for('static',
 	    filename='styles/6-filters.css') }}?{{ cache_id }}">
-    <link
+    <LINK
       rel="stylesheet"
       href="{{ url_for('static',
 	    filename='styles/8-places.css') }}?{{ cache_id }}">
-    <link
+    <LINK
       rel="stylesheet"
       href="{{ url_for('static',
 	    filename='styles/font-awesome.css') }}?{{ cache_id }}">
-  </head>
+  </HEAD>
 
   <!-- **********************
        BODY
        ********************** -->
 
-  <body>
+  <BODY>
 
     <!-- **********************
 	 HEADER
 	 ********************** -->
 
-    <header>
-      <div id="api_status">
-      </div>
-    </header>
-    <main>
-      <div class="container">
+    <HEADER>
+      <DIV id="api_status">
+      </DIV>
+    </HEADER>
+    <MAIN>
+      <DIV class="container">
 
 	<!-- **********************
 	     FILTERS
 	     ********************** -->
 
-	<section class="filters">
+	<SECTION class="filters">
 
 	  <!-- **********************
 	       LOCATIONS
 	       ********************** -->
 
-	  <div class="locations">
+	  <DIV class="locations">
 	    <h3>States</h3>
 	    <h4>&nbsp;</h4>
-	    <ul class="popover">
+	    <UL class="popover">
 	      {% for state in states|dictsort %}
 	      <H2>{{ state[0] }}</H2>
 	      <UL>
@@ -93,17 +93,17 @@
 		{% endfor %}
 	      </UL>
 	      {% endfor %}
-	    </ul>
-	  </div>
+	    </UL>
+	  </DIV>
 
 	  <!-- **********************
 	       AMENITIES
 	       ********************** -->
 
-	  <div class="amenities">
+	  <DIV class="amenities">
 	    <h3>Amenities</h3>
 	    <h4>&nbsp;</h4>
-	    <ul class="popover">
+	    <UL class="popover">
 	      {% for amenity in amens|sort(attribute='name') %}
 	      <LI><INPUT
 		    type="checkbox"
@@ -112,17 +112,17 @@
 		{{ amenity.name }}
 	      </LI>
 	      {% endfor %}
-	    </ul>
-	  </div>
+	    </UL>
+	  </DIV>
 
 	  <!-- **********************
 	       SEARCH BUTTON
 	       ********************** -->
 
 	  <button>Search</button>
-	</section>
+	</SECTION>
 
-	<section class="places">
+	<SECTION class="places">
 	  <h1>Places</h1>
 
 	<!-- **********************
@@ -130,14 +130,14 @@
 	     ********************** -->
 
 
-	</section>
-      </div>
-    </main>
+	</SECTION>
+      </DIV>
+    </MAIN>
 
     <!-- FOOTER -->
 
     <footer>
       Holberton School
     </footer>
-  </body>
-</html>
+  </BODY>
+</HTML>
