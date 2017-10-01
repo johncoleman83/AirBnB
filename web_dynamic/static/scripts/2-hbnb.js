@@ -24,20 +24,19 @@ function amenCheck () {
   });
 }
 
-function checkStatus () {
+function checkStatus (statusSignal) {
   $.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
     if (data.status === 'OK') {
-      console.log('status OK');
-      if (!$('DIV#api_status').hasClass('available')) {
-        $('DIV#api_status').toggleClass('available');
+      if (!statusSignal.hasClass('available')) {
+        statusSignal.toggleClass('available');
       }
-    } else if ($('DIV#api_status').hasClass('available')) {
-      $('DIV#api_status').toggleClass('available');
+    } else if (statusSignal.hasClass('available')) {
+      statusSignal.toggleClass('available');
     }
   });
 }
 
 $(document).ready(function () {
-  checkStatus();
+  checkStatus($('DIV#api_status'));
   amenCheck();
 });
