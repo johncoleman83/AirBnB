@@ -6,6 +6,19 @@ const notFound = [
   '<img src="static/images/guillaume.jpeg">'
 ];
 
+function checkStatus () {
+  $.ajax({
+    url: 'http://0.0.0.0:5001/api/v1/status/',
+    type: 'GET',
+    success: function (data) {
+      if (data.status === 'OK') { $('DIV#api_status').toggleClass('available'); }
+    },
+    error: function (data) {
+      console.log(data);
+    }
+  });
+}
+
 function updateHeader (headerVal) {
   if (headerVal === 'states-cities') {
     let statesString = Object.keys(checkedStates).join(', ');
@@ -62,18 +75,70 @@ function amenCheck () {
   });
 }
 
-function checkStatus () {
-  $.ajax({
-    url: 'http://0.0.0.0:5001/api/v1/status/',
-    type: 'GET',
-    success: function (data) {
-      if (data.status === 'OK')
-        $('DIV#api_status').toggleClass('available');
-    },
-    error: function (data) {
-      console.log(data);
-    }
+function appendStructure (place, userName) {
+  const structure = [
+    '<article>',
+    '<DIV class="title">',
+    '<h2>', place.name, '</h2>',
+    '<DIV class="price_by_night">',
+    '$' + place.price_by_night,
+    '</DIV>',
+    '</DIV>',
+    '<DIV class="information">',
+    '<DIV class="max_guest">',
+    '<i class="fa fa-users fa-3x" aria-hidden="true"></i>',
+    '<br />',
+    place.max_guest, ' Guests',
+    '</DIV>',
+    '<DIV class="number_rooms">',
+    '<i class="fa fa-bed fa-3x" aria-hidden="true"></i>',
+    '<br />',
+    place.number_rooms, ' Bedrooms',
+    '</DIV>',
+    '<DIV class="number_bathrooms">',
+    '<i class="fa fa-bath fa-3x" aria-hidden="true"></i>',
+    '<br />',
+    place.number_bathrooms, ' Bathroom',
+    '</DIV>',
+    '</DIV>',
+    '<div class="user">',
+    '<strong>Owner: ',
+    userName,
+    '</strong>',
+    '</div>',
+    '<DIV class="description">',
+    '<STRONG>Description:</STRONG>',
+    '<BR />',
+    place.description,
+    '<BR />',
+    '</DIV>',
+    '</article>'
+  ];
+  $(structure.join('')).appendTo($('.places'));
+}
+
+function getUserName (userId) {
+  return $.ajax({
+    url: 'http://0.0.0.0:5001/api/v1/users/' + userId,
+    type: 'GET'
   });
+}
+
+function loopData (data) {
+  $('<h1>Places</h1>').appendTo($('.places'));
+  for (let i in data) {
+    let place = data[i];
+    getUserName(place.user_id).done(
+      function (data) {
+        let userName = data.first_name + ' ' + data.last_name;
+        appendStructure(place, userName);
+      }
+    ).fail(
+      function (data) {
+        console.log(data);
+      }
+    );
+  }
 }
 
 function generatePlaces () {
@@ -98,44 +163,6 @@ function generatePlaces () {
       console.log(data);
     }
   });
-}
-
-function loopData (data) {
-  $('<h1>Places</h1>').appendTo($('.places'));
-  for (let i in data) {
-    let place = data[i];
-    const structure = [
-      '<article>',
-      '<DIV class="title">',
-      '<h2>', place.name, '</h2>',
-      '<DIV class="price_by_night">',
-      '$' + place.price_by_night,
-      '</DIV>',
-      '</DIV>',
-      '<DIV class="information">',
-      '<DIV class="max_guest">',
-      '<i class="fa fa-users fa-3x" aria-hidden="true"></i>',
-      '<br />',
-      place.max_guest, ' Guests',
-      '</DIV>',
-      '<DIV class="number_rooms">',
-      '<i class="fa fa-bed fa-3x" aria-hidden="true"></i>',
-      '<br />',
-      place.number_rooms, ' Bedrooms',
-      '</DIV>',
-      '<DIV class="number_bathrooms">',
-      '<i class="fa fa-bath fa-3x" aria-hidden="true"></i>',
-      '<br />',
-      place.number_bathrooms, ' Bathroom',
-      '</DIV>',
-      '</DIV>',
-      '<DIV class="description">',
-      place.description,
-      '</DIV>',
-      '</article>'
-    ];
-    $(structure.join('')).appendTo($('.places'));
-  }
 }
 
 function searchButton () {
