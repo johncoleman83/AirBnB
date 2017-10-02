@@ -86,7 +86,11 @@ function generatePlaces () {
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
     type: 'POST',
-    data: JSON.stringify({'amenities': Object.values(checkedAmens)}),
+    data: JSON.stringify({
+      'states': Object.values(checkedStates),
+      'cities': Object.values(checkedCities),
+      'amenities': Object.values(checkedAmens)
+    }),
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     success: function (data) {
