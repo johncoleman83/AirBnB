@@ -63,53 +63,55 @@ server {
 	}
 
 	# gunicorn configuration for airbnb-onepage
-	location /airbnb-onepage/ {
-		 include proxy_params;
-		 rewrite ^/airbnb-onepage(.*) /$1 break;
-		 proxy_pass http://127.0.0.1:8001;
-	}
+	# location /airbnb-onepage/ {
+	#	 include proxy_params;
+	#	 rewrite ^/airbnb-onepage(.*) /$1 break;
+	#	 proxy_pass http://127.0.0.1:8001;
+	# }
 
 	# gunicorn configuration for airbnb dynamic content
-	location /airbnb-dynamic/ {
-		 include proxy_params;
-		 rewrite ^/airbnb-dynamic(.*) /$1 break;
-		 proxy_pass http://127.0.0.1:8002;
-	}
+	# location /airbnb-dynamic/ {
+	#	 include proxy_params;
+	#	 rewrite ^/airbnb-dynamic(.*) /$1 break;
+	#	 proxy_pass http://127.0.0.1:8002;
+	# }
 
 	# config for static for full dynamic integration with mysql DB
 	location /static/ {
 		  include proxy_params;
-		  proxy_pass http://127.0.0.1:8003/static/;
+		  # rewrite ^/static(.*) /$1 break;
+		  proxy_pass http://127.0.0.1:8000;
 	}
 
 	# gunicorn configuration for fully dynamic with mysql DB
 	location /hbnb/ {
 		 include proxy_params;
-		 proxy_pass http://127.0.0.1:8003;
+		 rewrite ^/hbnb(.*) /$1 break;
+		 proxy_pass http://127.0.0.1:8000;
 	}
 
 	# gunicorn configuration for API Swagger (flasgger) DOCS
 	location /api/ {
 		 include proxy_params;
-		 proxy_pass http://127.0.0.1:8004;
+		 proxy_pass http://127.0.0.1:5001;
 	}
 
 	# gunicorn configuration for API Swagger (flasgger) DOCS
 	location /apidocs/ {
 		  include proxy_params;
-		  proxy_pass http://127.0.0.1:8004;
+		  proxy_pass http://127.0.0.1:5001;
 	}
 
 	# gunicorn configuration for API Swagger (flasgger) DOCS
 	location /apispec_1.json {
 		  include proxy_params;
-		  proxy_pass http://127.0.0.1:8004;
+		  proxy_pass http://127.0.0.1:5001;
 	}
 
 	# gunicorn configuration for API Swagger (flasgger) DOCS
 	location /flasgger_static/ {
 		  include proxy_params;
-		  proxy_pass http://127.0.0.1:8004;
+		  proxy_pass http://127.0.0.1:5001;
 	}
 
 	# Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests
