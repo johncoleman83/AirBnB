@@ -24,14 +24,21 @@ function amenCheck () {
   });
 }
 
-function checkStatus (statusSignal) {
-  $.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
-    if (data.status === 'OK') {
-      if (!statusSignal.hasClass('available')) {
-        statusSignal.toggleClass('available');
+function checkStatus () {
+  $.ajax({
+    url: 'http://0.0.0.0:5001/api/v1/status/',
+    type: 'GET',
+    success: function (data) {
+      if (data.status === 'OK') {
+        if (!$('DIV#api_status').hasClass('available')) {
+          $('DIV#api_status').toggleClass('available');
+        }
+      } else if ($('DIV#api_status').hasClass('available')) {
+        $('DIV#api_status').toggleClass('available');
       }
-    } else if (statusSignal.hasClass('available')) {
-      statusSignal.toggleClass('available');
+    },
+    error: function (data) {
+      console.log(data);
     }
   });
 }
@@ -89,8 +96,15 @@ function loopData (data) {
   }
 }
 
+/*
 $(document).ready(function () {
-  checkStatus($('DIV#api_status'));
+  checkStatus();
+  amenCheck();
+  generatePlaces();
+});
+*/
+$(window).on('load', function () {
+  checkStatus();
   amenCheck();
   generatePlaces();
 });

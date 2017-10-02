@@ -23,4 +23,6 @@ function amenCheck () {
 }
 
 const checkedItems = [];
-$(document).ready(amenCheck);
+$(window).on('load', function () {
+  amenCheck();
+});

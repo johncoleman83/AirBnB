@@ -1,4 +1,8 @@
 const checkedAmens = {};
+const notFound = [
+  '<h2 id="no_places_found">No places found :(</h2>',
+  '<img src="static/images/guillaume.jpeg">'
+];
 
 function amenCheck () {
   let allAmenInputs = $('.amenities INPUT');
@@ -17,14 +21,21 @@ function amenCheck () {
   });
 }
 
-function checkStatus (statusSignal) {
-  $.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
-    if (data.status === 'OK') {
-      if (!statusSignal.hasClass('available')) {
-        statusSignal.toggleClass('available');
+function checkStatus () {
+  $.ajax({
+    url: 'http://0.0.0.0:5001/api/v1/status/',
+    type: 'GET',
+    success: function (data) {
+      if (data.status === 'OK') {
+        if (!$('DIV#api_status').hasClass('available')) {
+          $('DIV#api_status').toggleClass('available');
+        }
+      } else if ($('DIV#api_status').hasClass('available')) {
+        $('DIV#api_status').toggleClass('available');
       }
-    } else if (statusSignal.hasClass('available')) {
-      statusSignal.toggleClass('available');
+    },
+    error: function (data) {
+      console.log(data);
     }
   });
 }
@@ -42,7 +53,7 @@ function generatePlaces () {
         console.log(data.length);
         loopData(data);
       } else {
-        $('<h2>No places found!</h2>').appendTo($('.places'));
+        $(notFound.join('')).appendTo($('.places'));
       }
     },
     error: function (data) {
@@ -89,15 +100,15 @@ function loopData (data) {
   }
 }
 
-function searchAmens () {
+function searchButton () {
   $('button').click(function () {
     $('.places').empty();
     generatePlaces();
   });
 }
 
-$(document).ready(function () {
-  checkStatus($('DIV#api_status'));
+$(window).on('load', function () {
+  checkStatus();
   amenCheck();
-  searchAmens();
+  searchButton();
 });
