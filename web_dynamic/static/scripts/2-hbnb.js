@@ -30,10 +30,6 @@ function checkStatus () {
     type: 'GET',
     success: function (data) {
       if (data.status === 'OK') {
-        if (!$('DIV#api_status').hasClass('available')) {
-          $('DIV#api_status').toggleClass('available');
-        }
-      } else if ($('DIV#api_status').hasClass('available')) {
         $('DIV#api_status').toggleClass('available');
       }
     },
@@ -44,6 +40,6 @@ function checkStatus () {
 }
 
 $(window).on('load', function () {
-  checkStatus();
-  amenCheck();
+checkStatus();
+amenCheck();
 });

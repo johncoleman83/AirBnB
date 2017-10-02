@@ -67,13 +67,8 @@ function checkStatus () {
     url: 'http://0.0.0.0:5001/api/v1/status/',
     type: 'GET',
     success: function (data) {
-      if (data.status === 'OK') {
-        if (!$('DIV#api_status').hasClass('available')) {
-          $('DIV#api_status').toggleClass('available');
-        }
-      } else if ($('DIV#api_status').hasClass('available')) {
+      if (data.status === 'OK')
         $('DIV#api_status').toggleClass('available');
-      }
     },
     error: function (data) {
       console.log(data);
@@ -82,7 +77,6 @@ function checkStatus () {
 }
 
 function generatePlaces () {
-  console.log('request URL ');
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
     type: 'POST',
@@ -95,7 +89,6 @@ function generatePlaces () {
     dataType: 'json',
     success: function (data) {
       if (data.length > 0) {
-        console.log(data.length);
         loopData(data);
       } else {
         $(notFound.join('')).appendTo($('.places'));
@@ -116,7 +109,7 @@ function loopData (data) {
       '<DIV class="title">',
       '<h2>', place.name, '</h2>',
       '<DIV class="price_by_night">',
-      place.price_by_night,
+      '$' + place.price_by_night,
       '</DIV>',
       '</DIV>',
       '<DIV class="information">',
