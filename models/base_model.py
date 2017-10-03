@@ -75,7 +75,8 @@ class BaseModel:
         """
         try:
             obj_to_str = json.dumps(obj_v)
-            return obj_to_str is not None and isinstance(obj_to_str, str)
+            return all(obj_to_str is not None,
+                       isinstance(obj_to_str, str))
         except:
             return False
 
@@ -112,10 +113,18 @@ class BaseModel:
             k: v if self.__is_serializable(v) else str(v)
             for k, v in self.__dict__.items()
         }
+        if 'amenities' in self.__dict__:
+            bm_dict['amenities'] = [
+                amen.name for amen in self.amenities
+            ]
+        if 'reviews' in self.__dict__:
+            bm_dict['reviews'] = [
+                review.to_json() for review in self.reviews
+            ]
         bm_dict.pop('_sa_instance_state', None)
         bm_dict.update({
             '__class__': obj_class
-            })
+        })
         if not saving_file_storage and obj_class == 'User':
             bm_dict.pop('password', None)
         return(bm_dict)

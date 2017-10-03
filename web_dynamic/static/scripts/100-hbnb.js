@@ -11,7 +11,9 @@ function checkStatus () {
     url: 'http://0.0.0.0:5001/api/v1/status/',
     type: 'GET',
     success: function (data) {
-      if (data.status === 'OK') { $('DIV#api_status').toggleClass('available'); }
+      if (data.status === 'OK') {
+        $('DIV#api_status').toggleClass('available');
+      }
     },
     error: function (data) {
       console.log(data);
@@ -75,8 +77,8 @@ function amenCheck () {
   });
 }
 
-function appendStructure (place, userName) {
-  const structure = [
+function appendStructure (place, userName, amenities, reviews) {
+  let structure = [
     '<article>',
     '<DIV class="title">',
     '<h2>', place.name, '</h2>',
@@ -112,6 +114,17 @@ function appendStructure (place, userName) {
     place.description,
     '<BR />',
     '</DIV>',
+    '<div class="amenities">',
+    '<h2>Amenities</h2>',
+    '<ul>',
+    amenities,
+    '</ul>',
+    '</div>',
+    '<div class="reviews">',
+    '<h2>Reviews</h2>',
+    '<ul>',
+    reviews,
+    '</ul>', '</div>',
     '</article>'
   ];
   $(structure.join('')).appendTo($('.places'));
@@ -124,14 +137,35 @@ function getUserName (userId) {
   });
 }
 
+function buildAmenities (placeAmenities) {
+  let amenities = [];
+  for (let a in placeAmenities) {
+    amenities.push('<li>' + placeAmenities[a] + '</li>');
+  }
+  return amenities.join('');
+}
+
+function buildReviews (placeReviews) {
+  let reviews = [];
+  for (let r in placeReviews) {
+    reviews.push('<li>' + placeReviews[r].text + '</li>');
+  }
+  if (reviews.length === 0) {
+    reviews.push('<li>No Reviews</li>');
+  }
+  return reviews.join('');
+}
+
 function loopData (data) {
   $('<h1>Places</h1>').appendTo($('.places'));
-  for (let i in data) {
-    let place = data[i];
+  for (let p in data) {
+    let place = data[p];
     getUserName(place.user_id).done(
       function (data) {
         let userName = data.first_name + ' ' + data.last_name;
-        appendStructure(place, userName);
+        let amenities = buildAmenities(place.amenities);
+        let reviews = buildReviews(place.reviews);
+        appendStructure(place, userName, amenities, reviews);
       }
     ).fail(
       function (data) {

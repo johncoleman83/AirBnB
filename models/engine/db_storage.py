@@ -51,6 +51,8 @@ class DBStorage:
             a_query = self.__session.query(DBStorage.CNC[cls])
             for obj in a_query:
                 obj_ref = "{}.{}".format(type(obj).__name__, obj.id)
+                if cls == 'Place' and obj.amenities and obj.reviews:
+                    pass
                 obj_dict[obj_ref] = obj
             return obj_dict
 
