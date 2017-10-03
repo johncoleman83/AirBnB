@@ -1,0 +1,39 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    position: relative;
+    padding: 5%;
+}
+
+section {
+    margin: 4%;
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+img {
+    box-shadow: 0 0 3px 3px #070707;
+    margin: 0 auto 0 auto;
+}
+
+body {
+    font-family: "Avenir Next", Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 100%;
+}
+
+@media screen and (max-width: 600px) {
+
+}
