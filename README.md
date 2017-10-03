@@ -37,8 +37,8 @@ HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db \
 
 ## Environment
 
-* __OS:__ Ubuntu 14.04 LTS
-* __language:__ Python 3.4.3
+* __OS:__ Linux Ubuntu 14.04 LTS
+* __languages:__ Python 3.4.3, Javascript, HTML, CSS
 * __web server:__ nginx/1.4.6
 * __application server:__ Flask 0.12.2, Jinja2 2.9.6
 * __web server gateway:__ gunicorn (version 19.7.1)
@@ -48,6 +48,7 @@ HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db \
   * __python:__ PEP 8 (v. 1.7.0)
   * __web static:__ [W3C Validator](https://validator.w3.org/)
   * __bash:__ ShellCheck 0.3.3
+  * __JavaScript:__ semistandard 11.0.0
 
 <img src="https://github.com/jarehec/AirBnB_clone_v3/blob/master/dev/hbnb_step5.png" />
 
