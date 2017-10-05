@@ -43,12 +43,7 @@ server {
 	# main root of website
 	location / {
 		 root /usr/share/nginx/html;
-		 # First attempt to serve request as file, then
-		 # as directory, then fall back to displaying a 404.
 		 try_files $uri $uri/ =404;
-		 # include proxy_params;
-		 # rewrite ^/(.*) /$1 break;
-		 # proxy_pass http://127.0.0.1:8002;
 		 include /etc/nginx/mime.types;
 		 index index.html;
 		 # Uncomment to enable naxsi on this location
@@ -88,6 +83,13 @@ server {
 		 include proxy_params;
 		 rewrite ^/hbnb(.*) /$1 break;
 		 proxy_pass http://127.0.0.1:8000;
+	}
+
+	# gunicorn configuration for Nautilus web app
+	location /nautilus/ {
+		 include proxy_params;
+		 rewrite ^/nautilus(.*) /$1 break;
+		 proxy_pass http://127.0.0.1:8001;
 	}
 
 	# gunicorn configuration for API Swagger (flasgger) DOCS
