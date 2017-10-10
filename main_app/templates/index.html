@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+<MAIN>
+  <DIV class="container">
+
+    <DIV class="row">
+      <DIV class="form_bg">
+        <form>
+          <h2 class="text-center">Login Page</h2>
+
+          <br/>
+          <DIV class="form-group">
+            <input
+	      type="email"
+	      class="form-control"
+	      id="userid"
+	      placeholder="User id"
+	      required>
+          </DIV>
+          <DIV class="form-group">
+            <input
+	      type="password"
+	      class="form-control"
+	      id="pwd"
+	      placeholder="Password"
+	      required>
+          </DIV>
+          <br/>
+          <DIV class="align-center">
+            <button
+	      type="submit"
+	      class="btn btn-default"
+	      id="login">Login</button>
+          </DIV>
+        </form>
+      </DIV>
+    </DIV>
+
+  </DIV>
+</MAIN>
+{% endblock %}

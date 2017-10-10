@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<HTML lang="en">
+  <HEAD>
+
+    <!-- HEAD -->
+
+    <META charset="utf-8">
+    <META name="viewport" content="width=device-width">
+    <title>Holberton AirBnB</title>
+
+    <!-- FAVICON -->
+
+    <LINK
+      rel="shortcut icon"
+      href="{{ url_for('static',
+	    filename='images/icon.png') }}?{{ cache_id }}">
+
+    <!-- IMPORT JQUERY -->
+
+    <SCRIPT src="{{ url_for('static' filename='scripts/jquery-3.2.1.min.js') }}"></SCRIPT>
+
+    <!-- JAVASCRIPT FILES -->
+
+    <SCRIPT src="{{ url_for('static' filename='scripts/places.js') }}?{{ cache_id }}"></SCRIPT>
+
+    <!-- **********************
+	 CSS styles
+	 ********************** -->
+
+    <LINK
+      rel="stylesheet"
+      href="{{ url_for('static',
+	    filename='styles/4-common.css') }}?{{ cache_id }}">
+    <LINK
+      rel="stylesheet"
+      href="{{ url_for('static',
+	    filename='styles/3-header.css') }}?{{ cache_id }}">
+    <LINK
+      rel="stylesheet"
+      href="{{ url_for('static',
+	    filename='styles/3-footer.css') }}?{{ cache_id }}">
+    <LINK
+      rel="stylesheet"
+      href="{{ url_for('static',
+	    filename='styles/6-filters.css') }}?{{ cache_id }}">
+    <LINK
+      rel="stylesheet"
+      href="{{ url_for('static',
+	    filename='styles/8-places.css') }}?{{ cache_id }}">
+    <LINK
+      rel="stylesheet"
+      href="{{ url_for('static',
+	    filename='styles/font-awesome.css') }}?{{ cache_id }}">
+  </HEAD>
+
+  <!-- **********************
+       BODY
+       ********************** -->
+
+  <BODY>
+
+    <!-- **********************
+	 HEADER
+	 ********************** -->
+
+    <HEADER>
+      <DIV id="api_status">
+      </DIV>
+    </HEADER>
+
+    <!-- BLOCK CONTETN -->
+    
+    {% block content %}
+    {% endblock %}
+
+    <!-- FOOTER -->
+
+    <footer>
+      Holberton School
+    </footer>
+  </BODY>
+</HTML>
