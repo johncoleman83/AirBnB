@@ -29,7 +29,7 @@ class RegisterAPI(MethodView):
         User = CNC.get('User')
         new_user = User(**req_data)
         new_user.save()
-        auth_token = new_user.encode_auth_token(user.id)
+        auth_token = new_user.encode_auth_token(new_user.id)
         responseObject = {
             'status': 'success',
             'message': 'Successfully registered.',
@@ -57,7 +57,7 @@ class LoginAPI(MethodView):
         secure_password = User.pass_encryption(password)
         if secure_password != user_obj.password:
             abort(400, 'Incorrect Password. Please try again or register.')
-        auth_token = user_obj.encode_auth_token(user.id)
+        auth_token = user_obj.encode_auth_token(user_obj.id)
         responseObject = {
             'status': 'success',
             'message': 'Successfully logged in.',
@@ -90,9 +90,7 @@ class UserAPI(MethodView):
         if user_obj:
             responseObject = {
                 'status': 'success',
-                'data': {
-                    user_obj.to_json()
-                }
+                'data': user_obj.to_json()
             }
             return make_response(jsonify(responseObject)), 200
         abort(400, 'An error occurred.')
@@ -137,7 +135,6 @@ logout_view = LogoutAPI.as_view('logout_api')
 """
 
 # add Rules for API Endpoints
-# removed /auth/ prefix from all rules & moved it to blueprint definition
 auth_blueprint.add_url_rule(
     '/register',
     view_func=RegisterAPI.as_view('register_api'),
