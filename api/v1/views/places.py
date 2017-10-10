@@ -78,11 +78,9 @@ def places_search():
     """
     all_places = [p for p in storage.all('Place').values()]
     req_data = request.get_json()
-    print(req_data)
     if req_data is None:
         abort(400, 'Not a JSON')
     auth_header = request.headers.get('Authorization')
-    print(request.headers)
     if auth_header:
         try:
             auth_token = auth_header.split(" ")[1]

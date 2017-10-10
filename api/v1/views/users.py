@@ -4,7 +4,7 @@
 """
 from api.v1.views import app_views
 from flask import abort, jsonify, request
-from models import storage, CNC
+from models import storage, CNC, User
 from flasgger.utils import swag_from
 
 
@@ -14,6 +14,17 @@ def users_no_id(user_id=None):
     """
         users route that handles http requests with no ID given
     """
+    auth_header = request.headers.get('Authorization')
+    if auth_header:
+        try:
+            auth_token = auth_header.split(" ")[1]
+        except IndexError:
+            abort(400, 'Bearer token malformed.')
+    else:
+        abort(400, 'Provide a valid auth token.')
+    resp = User.decode_auth_token(auth_token)
+    if 'Please log in again.' in resp:
+        abort(400, resp)
 
     if request.method == 'GET':
         all_users = storage.all('User')
@@ -40,6 +51,19 @@ def user_with_id(user_id=None):
     """
         users route that handles http requests with ID given
     """
+    auth_header = request.headers.get('Authorization')
+    print(request.headers)
+    if auth_header:
+        try:
+            auth_token = auth_header.split(" ")[1]
+        except IndexError:
+            abort(400, 'Bearer token malformed.')
+    else:
+        abort(400, 'Provide a valid auth token.')
+    resp = User.decode_auth_token(auth_token)
+    if 'Please log in again.' in resp:
+        abort(400, resp)
+
     user_obj = storage.get('User', user_id)
     if user_obj is None:
         abort(404, 'Not found')
