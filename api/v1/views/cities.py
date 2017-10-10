@@ -25,14 +25,14 @@ def cities_per_state(state_id=None):
         return jsonify(state_cities)
 
     if request.method == 'POST':
-        req_json = request.get_json()
-        if req_json is None:
+        req_data = request.get_json()
+        if req_data is None:
             abort(400, 'Not a JSON')
-        if req_json.get("name") is None:
+        if req_data.get("name") is None:
             abort(400, 'Missing name')
         City = CNC.get("City")
-        req_json['state_id'] = state_id
-        new_object = City(**req_json)
+        req_data['state_id'] = state_id
+        new_object = City(**req_data)
         new_object.save()
         return jsonify(new_object.to_json()), 201
 
@@ -56,8 +56,8 @@ def cities_with_id(city_id=None):
         return jsonify({}), 200
 
     if request.method == 'PUT':
-        req_json = request.get_json()
-        if req_json is None:
+        req_data = request.get_json()
+        if req_data is None:
             abort(400, 'Not a JSON')
-        city_obj.bm_update(req_json)
+        city_obj.bm_update(req_data)
         return jsonify(city_obj.to_json()), 200

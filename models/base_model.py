@@ -3,13 +3,13 @@
 BaseModel Class of Models Module
 """
 
-import os
+from datetime import datetime
 import json
 import models
-from uuid import uuid4, UUID
-from datetime import datetime
+import os
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, DateTime
+from uuid import uuid4, UUID
 
 STORAGE_TYPE = os.environ.get('HBNB_TYPE_STORAGE')
 

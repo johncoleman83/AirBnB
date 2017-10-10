@@ -21,15 +21,15 @@ def users_no_id(user_id=None):
         return jsonify(all_users)
 
     if request.method == 'POST':
-        req_json = request.get_json()
-        if req_json is None:
+        req_data = request.get_json()
+        if req_data is None:
             abort(400, 'Not a JSON')
-        if req_json.get('email') is None:
+        if req_data.get('email') is None:
             abort(400, 'Missing email')
-        if req_json.get('password') is None:
+        if req_data.get('password') is None:
             abort(400, 'Missing password')
         User = CNC.get('User')
-        new_object = User(**req_json)
+        new_object = User(**req_data)
         new_object.save()
         return jsonify(new_object.to_json()), 201
 
@@ -53,8 +53,8 @@ def user_with_id(user_id=None):
         return jsonify({}), 200
 
     if request.method == 'PUT':
-        req_json = request.get_json()
-        if req_json is None:
+        req_data = request.get_json()
+        if req_data is None:
             abort(400, 'Not a JSON')
-        user_obj.bm_update(req_json)
+        user_obj.bm_update(req_data)
         return jsonify(user_obj.to_json()), 200

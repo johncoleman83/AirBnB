@@ -27,20 +27,20 @@ def reviews_per_place(place_id=None):
     if request.method == 'POST':
         if place_obj is None:
             abort(404, 'Not found')
-        req_json = request.get_json()
-        if req_json is None:
+        req_data = request.get_json()
+        if req_data is None:
             abort(400, 'Not a JSON')
-        user_id = req_json.get("user_id")
+        user_id = req_data.get("user_id")
         if user_id is None:
             abort(400, 'Missing user_id')
         user_obj = storage.get('User', user_id)
         if user_obj is None:
             abort(404, 'Not found')
-        if req_json.get('text') is None:
+        if req_data.get('text') is None:
             abort(400, 'Missing text')
         Review = CNC.get("Review")
-        req_json['place_id'] = place_id
-        new_object = Review(**req_json)
+        req_data['place_id'] = place_id
+        new_object = Review(**req_data)
         new_object.save()
         return jsonify(new_object.to_json()), 201
 
@@ -68,8 +68,8 @@ def reviews_with_id(review_id=None):
     if request.method == 'PUT':
         if review_obj is None:
             abort(404, 'Not found')
-        req_json = request.get_json()
-        if req_json is None:
+        req_data = request.get_json()
+        if req_data is None:
             abort(400, 'Not a JSON')
-        review_obj.bm_update(req_json)
+        review_obj.bm_update(req_data)
         return jsonify(review_obj.to_json()), 200

@@ -9,6 +9,12 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 from models import base_model, amenity, city, place, review, state, user
 
+HBUSER = environ.get('HBNB_MYSQL_USER')
+HBPW = environ.get('HBNB_MYSQL_PWD')
+HBHOST = environ.get('HBNB_MYSQL_HOST')
+HBDB = environ.get('HBNB_MYSQL_DB')
+HBENV = os.environ.get("HBNB_ENV")
+
 
 class DBStorage:
     """
@@ -20,7 +26,8 @@ class DBStorage:
         'Place': place.Place,
         'Review': review.Review,
         'State': state.State,
-        'User': user.User
+        'User': user.User,
+        'BlacklistToken': user.BlacklistToken
     }
 
     """
@@ -34,12 +41,10 @@ class DBStorage:
             creates the engine self.__engine
         """
         self.__engine = create_engine(
-            'mysql+mysqldb://{}:{}@{}/{}'.format(
-                os.environ.get('HBNB_MYSQL_USER'),
-                os.environ.get('HBNB_MYSQL_PWD'),
-                os.environ.get('HBNB_MYSQL_HOST'),
-                os.environ.get('HBNB_MYSQL_DB')))
-        if os.environ.get("HBNB_ENV") == 'test':
+            'mysql+mysqldb://{}:{}@{}:3306/{}'
+            .format(HBUSER, HBPW, HBHOST, HBDB)
+        )
+        if HBENV == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
