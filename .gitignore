@@ -3,3 +3,4 @@
 __pycache__
 dev/file.json
 versions/*
+authentication_secret.py
