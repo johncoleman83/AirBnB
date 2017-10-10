@@ -5,7 +5,7 @@ Flask route that returns json status response
 from api.v1.views import app_views
 from flask import abort, jsonify, request
 from flasgger.utils import swag_from
-from models import storage, CNC
+from models import CNC, storage, User
 from os import environ
 STORAGE_TYPE = environ.get('HBNB_TYPE_STORAGE')
 
@@ -78,8 +78,22 @@ def places_search():
     """
     all_places = [p for p in storage.all('Place').values()]
     req_data = request.get_json()
+    print(req_data)
     if req_data is None:
         abort(400, 'Not a JSON')
+    auth_header = request.headers.get('Authorization')
+    print(request.headers)
+    if auth_header:
+        try:
+            auth_token = auth_header.split(" ")[1]
+        except IndexError:
+            abort(400, 'Bearer token malformed.')
+    else:
+        abort(400, 'Provide a valid auth token.')
+    resp = User.decode_auth_token(auth_token)
+    if 'Please log in again.' in resp:
+        abort(400, resp)
+
     states = req_data.get('states')
     if states and len(states) > 0:
         all_cities = storage.all('City')

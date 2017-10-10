@@ -130,10 +130,14 @@ function appendStructure (place, userName, amenities, reviews) {
   $(structure.join('')).appendTo($('.places'));
 }
 
-function getUserName (userId) {
+function getUserName (userId, authToken) {
   return $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/users/' + userId,
-    type: 'GET'
+    type: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + authToken
+    },
+    contentType: 'application/json; charset=utf-8'
   });
 }
 
@@ -156,11 +160,11 @@ function buildReviews (placeReviews) {
   return reviews.join('');
 }
 
-function loopData (data) {
+function loopData (data, authToken) {
   $('<h1>Places</h1>').appendTo($('.places'));
   for (let p in data) {
     let place = data[p];
-    getUserName(place.user_id).done(
+    getUserName(place.user_id, authToken).done(
       function (data) {
         let userName = data.first_name + ' ' + data.last_name;
         let amenities = buildAmenities(place.amenities);
@@ -176,9 +180,13 @@ function loopData (data) {
 }
 
 function generatePlaces () {
+  let authToken = $('.filters').attr('id')
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
     type: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + authToken
+    },
     data: JSON.stringify({
       'states': Object.values(checkedStates),
       'cities': Object.values(checkedCities),
@@ -188,7 +196,7 @@ function generatePlaces () {
     dataType: 'json',
     success: function (data) {
       if (data.length > 0) {
-        loopData(data);
+        loopData(data, authToken);
       } else {
         $(notFound.join('')).appendTo($('.places'));
       }
@@ -199,7 +207,7 @@ function generatePlaces () {
   });
 }
 
-function searchButton () {
+function searchButton (authToken) {
   $('button').click(function () {
     $('.places').empty();
     generatePlaces();
@@ -207,7 +215,6 @@ function searchButton () {
 }
 
 $(window).on('load', function () {
-  let authToken = $('.filters').attr('id')
   checkStatus();
   amenCheck();
   stateCityCheck();

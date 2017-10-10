@@ -12,7 +12,7 @@ from uuid import uuid4
 # flask setup
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-port = 5001
+port = 5000
 host = '0.0.0.0'
 
 
@@ -43,7 +43,7 @@ def main_index(the_id=None):
         headers = {
             'content-type': 'application/json'
         }
-        url = 'http://0.0.0.0:5000/auth/login'
+        url = 'http://0.0.0.0:5001/auth/login'
         r = requests.post(url, headers=headers, data=json.dumps(payload))
         r_data = r.json()
         if r_data.get('error'):
