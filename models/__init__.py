@@ -7,6 +7,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 from models.user import BlacklistToken
+from models import authentication_secret
 
 """CNC - dictionary = { Class Name (string) : Class Type }"""
 

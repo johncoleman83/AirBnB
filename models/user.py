@@ -12,7 +12,6 @@ import os
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, Float, DateTime
 from uuid import uuid4
-from authentication_secret import SECRET_KEY
 utcnow = datetime.utcnow
 STORAGE_TYPE = os.environ.get('BTCPBNB_TYPE_STORAGE')
 SECRET_KEY = authentication_secret.SECRET_KEY
