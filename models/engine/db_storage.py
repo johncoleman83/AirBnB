@@ -9,10 +9,10 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 from models import base_model, amenity, city, place, review, state, user
 
-HBUSER = environ.get('HBNB_MYSQL_USER')
-HBPW = environ.get('HBNB_MYSQL_PWD')
-HBHOST = environ.get('HBNB_MYSQL_HOST')
-HBDB = environ.get('HBNB_MYSQL_DB')
+HBUSER = os.environ.get('HBNB_MYSQL_USER')
+HBPW = os.environ.get('HBNB_MYSQL_PWD')
+HBHOST = os.environ.get('HBNB_MYSQL_HOST')
+HBDB = os.environ.get('HBNB_MYSQL_DB')
 HBENV = os.environ.get("HBNB_ENV")
 
 

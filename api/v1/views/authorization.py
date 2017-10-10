@@ -27,7 +27,7 @@ class RegisterAPI(MethodView):
             if user.email == email:
                 abort(400, 'User already exists. Please Log in.')
         User = CNC.get('User')
-        new_user = User(**req_json)
+        new_user = User(**req_data)
         new_user.save()
         auth_token = new_user.encode_auth_token(user.id)
         responseObject = {
