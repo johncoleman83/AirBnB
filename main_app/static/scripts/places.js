@@ -8,7 +8,7 @@ const notFound = [
 
 function checkStatus () {
   $.ajax({
-    url: 'http://0.0.0.0:5001/api/v1/status/',
+    url: 'https://www.cecinestpasun.site:5001/api/v1/status/',
     type: 'GET',
     success: function (data) {
       if (data.status === 'OK') {
@@ -132,7 +132,7 @@ function appendStructure (place, userName, amenities, reviews) {
 
 function getUserName (userId, authToken) {
   return $.ajax({
-    url: 'http://0.0.0.0:5001/api/v1/users/' + userId,
+    url: 'https://www.cecinestpasun.site:5001/api/v1/users/' + userId,
     type: 'GET',
     headers: {
       'Authorization': 'Bearer ' + authToken
@@ -182,7 +182,7 @@ function loopData (data, authToken) {
 function generatePlaces () {
   let authToken = $('.filters').attr('id')
   $.ajax({
-    url: 'http://0.0.0.0:5001/api/v1/places_search/',
+    url: 'https://www.cecinestpasun.site:5001/api/v1/places_search/',
     type: 'POST',
     headers: {
       'Authorization': 'Bearer ' + authToken
