@@ -1,6 +1,9 @@
 const checkedAmens = {};
 const checkedStates = {};
 const checkedCities = {};
+const remotehost = 'https://www.cecinestpasun.site';
+const localhost = 'http://0.0.0.0:5001';
+var domain = localhost;
 const notFound = [
   '<h2 id="no_places_found">No places found :(</h2>',
   '<img src="static/images/guillaume.jpeg">'
@@ -8,7 +11,7 @@ const notFound = [
 
 function checkStatus () {
   $.ajax({
-    url: 'https://www.cecinestpasun.site:5001/api/v1/status/',
+    url: domain + '/api/v1/status/',
     type: 'GET',
     success: function (data) {
       if (data.status === 'OK') {
@@ -132,7 +135,7 @@ function appendStructure (place, userName, amenities, reviews) {
 
 function getUserName (userId, authToken) {
   return $.ajax({
-    url: 'https://www.cecinestpasun.site:5001/api/v1/users/' + userId,
+    url: domain + '/api/v1/users/' + userId,
     type: 'GET',
     headers: {
       'Authorization': 'Bearer ' + authToken
@@ -182,7 +185,7 @@ function loopData (data, authToken) {
 function generatePlaces () {
   let authToken = $('.filters').attr('id')
   $.ajax({
-    url: 'https://www.cecinestpasun.site:5001/api/v1/places_search/',
+    url: domain + '/api/v1/places_search/',
     type: 'POST',
     headers: {
       'Authorization': 'Bearer ' + authToken

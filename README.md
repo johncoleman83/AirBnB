@@ -32,7 +32,7 @@ storage engine models:
 ```
 $ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd \
 HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db \
-[COMMAND HERE]
+[COMMAND HERE (example: python3 -m main_app.app)]
 ```
 
 ## Environment
@@ -40,9 +40,10 @@ HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db \
 * __OS:__ Linux Ubuntu 14.04 LTS
 * __languages:__ Python 3.4.3, Javascript, HTML, CSS
 * __web server:__ nginx/1.4.6
-* __application server:__ Flask 0.12.2, Jinja2 2.9.6
+* __application server:__ Flask==0.12.2, Jinja2==2.9.6
 * __web server gateway:__ gunicorn (version 19.7.1)
 * __database:__ mysql Ver 14.14 Distrib 5.7.18
+* __JSON Web Token:__ PyJWT==1.4.2
 * __documentation:__ Swagger (flasgger==0.6.6)
 * __style:__
   * __python:__ PEP 8 (v. 1.7.0)
@@ -66,7 +67,7 @@ $ sudo start airbnb.conf
 This script's main task is to execute the following `gunicorn` command:
 
 ```
-$ gunicorn --bind 127.0.0.1:8001 wsgi.wsgi:web_flask.app
+$ gunicorn --bind 127.0.0.1:8001 wsgi.wsgi_airbnb:app.app
 ```
 
 The `gunicorn` command starts an instance of a Flask Application.
@@ -86,22 +87,9 @@ during maintanence or to scale the entire project.  The following files are the
 setupfiles along with a brief explanation:
 
 * **`dev/setup.sql`:** Drops test and dev databases, and then reinitializes
-the datbase.
+the database.
 
-  * Usage: `$ cat dev/setup.sql | mysql -uroot -p`
-
-* **`setup_mysql_dev.sql`:** initialiezs dev database with mysql for testing
-
-  * Usage: `$ cat setup_mysql_dev.sql | mysql -uroot -p`
-
-* **`setup_mysql_test.sql`:** initializes test database with mysql for testing
-
-  * Usage: `$ cat setup_mysql_test.sql | mysql -uroot -p`
-
-* **`0-setup_web_static.sh`:** sets up nginx web server config file & the file
-  structure.
-
-  * Usage: `$ sudo ./0-setup_web_static.sh`
+  * Usage: `$ cat dev/bd/drop_recreate_dev_test_db.sql | mysql -uroot -p`
 
 * **`3-deploy_web_static.py`:** uses 2 functions from (1-pack_web_static.py &
   2-do_deploy_web_static.py) that use the fabric3 python integration, to create
