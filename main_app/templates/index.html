@@ -29,14 +29,28 @@
           <br/>
           <DIV class="align-center">
             <button
+	      name="action"
+	      value="login"
 	      type="submit"
 	      class="btn btn-default"
 	      id="login">Login</button>
+            <button
+	      name="action"
+	      value="signup"
+	      type="submit"
+	      class="btn btn-default"
+	      id="login">Sign Up</button>
           </DIV>
         </form>
       </DIV>
+      <p class="error_message">
+	To test, you may login with credentials:
+	<br>un: 'test@user.com' pw: 'testuser'
+	<br>(quotes are not a part of the credential)</p>
+      {% if message is not none %}
+      <p class="error_message">{{ message }}</p>
+      {% endif %}
     </DIV>
-
   </DIV>
 </MAIN>
 {% endblock %}

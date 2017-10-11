@@ -39,10 +39,18 @@ class RegisterAPI(MethodView):
         return make_response(jsonify(responseObject)), 201
 
 
+auth_blueprint.add_url_rule(
+    '/register',
+    view_func=RegisterAPI.as_view('register_api'),
+    methods=['POST']
+)
+
+
 class LoginAPI(MethodView):
     """
     User Login Resource
     """
+
     def post(self):
         all_users = storage.all('User').values()
         req_data = request.get_json()
@@ -66,10 +74,18 @@ class LoginAPI(MethodView):
         return make_response(jsonify(responseObject)), 200
 
 
+auth_blueprint.add_url_rule(
+    '/login',
+    view_func=LoginAPI.as_view('login_api'),
+    methods=['POST']
+)
+
+
 class UserAPI(MethodView):
     """
     User Resource
     """
+
     def get(self):
         auth_header = request.headers.get('Authorization')
         if auth_header:
@@ -96,10 +112,18 @@ class UserAPI(MethodView):
         abort(400, 'An error occurred.')
 
 
+auth_blueprint.add_url_rule(
+    '/status',
+    view_func=UserAPI.as_view('user_api'),
+    methods=['GET']
+)
+
+
 class LogoutAPI(MethodView):
     """
     Logout Resource
     """
+
     def post(self):
         auth_header = request.headers.get('Authorization')
         if auth_header:
@@ -127,29 +151,7 @@ class LogoutAPI(MethodView):
             }
             return abort(400, e)
 
-"""
-registration_view = RegisterAPI.as_view('register_api')
-login_view = LoginAPI.as_view('login_api')
-user_view = UserAPI.as_view('user_api')
-logout_view = LogoutAPI.as_view('logout_api')
-"""
 
-# add Rules for API Endpoints
-auth_blueprint.add_url_rule(
-    '/register',
-    view_func=RegisterAPI.as_view('register_api'),
-    methods=['POST']
-)
-auth_blueprint.add_url_rule(
-    '/login',
-    view_func=LoginAPI.as_view('login_api'),
-    methods=['POST']
-)
-auth_blueprint.add_url_rule(
-    '/status',
-    view_func=UserAPI.as_view('user_api'),
-    methods=['GET']
-)
 auth_blueprint.add_url_rule(
     '/logout',
     view_func=LogoutAPI.as_view('logout_api'),

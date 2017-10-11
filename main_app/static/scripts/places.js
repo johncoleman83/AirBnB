@@ -208,7 +208,7 @@ function generatePlaces () {
 }
 
 function searchButton (authToken) {
-  $('button').click(function () {
+  $('.filters button').click(function () {
     $('.places').empty();
     generatePlaces();
   });

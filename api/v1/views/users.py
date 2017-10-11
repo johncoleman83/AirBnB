@@ -52,7 +52,6 @@ def user_with_id(user_id=None):
         users route that handles http requests with ID given
     """
     auth_header = request.headers.get('Authorization')
-    print(request.headers)
     if auth_header:
         try:
             auth_token = auth_header.split(" ")[1]

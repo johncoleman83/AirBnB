@@ -32,7 +32,8 @@ def main_index(the_id=None):
     handles request to main index, currently a login page
     """
     if request.method == 'GET':
-        return render_template('index.html')
+        cache_id = uuid4()
+        return render_template('index.html', cache_id=cache_id, message=None)
     if request.method == 'POST':
         email = request.form.get('email', None)
         password = request.form.get('password', None)
@@ -43,14 +44,20 @@ def main_index(the_id=None):
         headers = {
             'content-type': 'application/json'
         }
-        url = 'http://0.0.0.0:5001/auth/login'
+        if request.form.get('action') == 'login':
+            url = 'http://0.0.0.0:5001/auth/login'
+        else:
+            url = 'http://0.0.0.0:5001/auth/register'
         r = requests.post(url, headers=headers, data=json.dumps(payload))
         r_data = r.json()
         if r_data.get('error'):
-            return render_template('index.html')
+            return render_template('index.html', message=r_data.get('error'))
         auth_token = r_data.get('auth_token')
         if auth_token is None:
-            return render_template('index.html')
+            return render_template('index.html', message=r_data.get('error'))
+        if 'register' in url:
+            signup_message = 'thank you for signing up'
+            return render_template('index.html', message=signup_message)
         state_objs = storage.all('State').values()
         states = dict([state.name, state] for state in state_objs)
         amens = list(storage.all('Amenity').values())
@@ -59,18 +66,31 @@ def main_index(the_id=None):
                                cache_id=cache_id, auth_token=auth_token)
 
 
-@app.route('/places/', methods=['GET'])
-def hbnb_filters(the_id=None):
+@app.route('/logout', methods=['POST'])
+def logout(the_id=None):
     """
-    handles request to custom template with states, cities & amentities
+    handles request to main index, currently a login page
     """
-    state_objs = storage.all('State').values()
-    states = dict([state.name, state] for state in state_objs)
-    amens = list(storage.all('Amenity').values())
+    auth_token = request.form.get('logout')
+    headers = {
+        'content-type': 'application/json',
+        'Authorization': 'Bearer {}'.format(auth_token)
+    }
+    url = 'http://0.0.0.0:5001/auth/logout'
+    r = requests.post(url, headers=headers)
+    r_data = r.json()
+    if r_data.get('error'):
+        return render_template('index.html', message=r_data.get('error'))
+    message = 'You are now logged out.'
     cache_id = uuid4()
-    auth_token = 'please_login'
-    return render_template('places.html', states=states, amens=amens,
-                           cache_id=cache_id, auth_token=auth_token)
+    return render_template('index.html', cache_id=cache_id, message=message)
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    cache_id = uuid4()
+    return render_template('404.html', cache_id=cache_id), 404
+
 
 if __name__ == "__main__":
     """
