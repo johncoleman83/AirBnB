@@ -88,11 +88,15 @@ def logout(the_id=None):
 
 @app.errorhandler(404)
 def page_not_found(error):
+    """
+    404 Error Handler
+    """
     cache_id = uuid4()
     return render_template('404.html', cache_id=cache_id), 404
 
 
 if __name__ == "__main__":
     """
-    MAIN Flask App"""
+    MAIN Flask App
+    """
     app.run(host=host, port=port)
