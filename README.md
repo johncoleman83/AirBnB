@@ -2,7 +2,7 @@
 
 # AirBnB Clone
 
-: Final Phase - Places Search Endpoint.
+: Places Search with JSON Web Tokens Login.
 
 * [demo and all endpoints](https://www.cecinestpasun.site)
 
