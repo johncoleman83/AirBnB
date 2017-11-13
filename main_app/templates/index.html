@@ -5,7 +5,7 @@
     <DIV class="row">
       <DIV class="form_bg">
 	<!-- <form action="/hbnb/" method="post"> -->
-        <form action="/" method="post">
+        <form action="/hbnb/" method="post">
           <h2 class="text-center">Please Login to Access Content</h2>
 
           <br/>
@@ -15,7 +15,7 @@
 	      class="form-control"
 	      id="form-email"
 	      name="email"
-	      placeholder="User id"
+	      placeholder="your email"
 	      required>
           </DIV>
           <DIV class="form-group">
@@ -24,7 +24,7 @@
 	      class="form-control"
 	      id="form-password"
 	      name="password"
-	      placeholder="Password"
+	      placeholder="your password"
 	      required>
           </DIV>
           <br/>
@@ -46,7 +46,7 @@
       </DIV>
       <p class="error_message">
 	To test, you may login with credentials:
-	<br>un: 'test@user.com' pw: 'testuser'
+	<br>un: 'username@test.com' pw: 'password'
 	<br>(quotes are not a part of the credential)</p>
       {% if message is not none %}
       <p class="error_message">{{ message }}</p>

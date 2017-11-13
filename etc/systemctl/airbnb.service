@@ -1,0 +1,26 @@
+# systemd config file
+# path: /lib/systemd/system/airbnb.service
+# reload daemon: $ sudo systemctl daemon-reload
+# start service: $ sudo systemctl start airbnb.service
+
+[Unit]
+Description=gunicorn application server running AirBnB_clone
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/github.com/johncoleman83/AirBnB
+ExecStart=/usr/local/bin/gunicorn --bind 127.0.0.1:8000 wsgi.wsgi_airbnb:app.app
+TimeoutSec=30
+Restart=on-failure
+RestartSec=30
+StartLimitInterval=350
+StartLimitBurst=10
+Environment=HBNB_MYSQL_USER=hbnb_dev
+Environment=HBNB_MYSQL_PWD=hbnb_dev_pwd
+Environment=HBNB_MYSQL_HOST=localhost
+Environment=HBNB_MYSQL_DB=hbnb_dev_db
+Environment=HBNB_TYPE_STORAGE=db
+
+[Install]
+WantedBy=multi-user.target
