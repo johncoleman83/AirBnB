@@ -23,6 +23,10 @@ server {
 	# Make site accessible from http://localhost/
 	server_name localhost;
 
+	# main root
+	root /usr/share/nginx/html;
+	index index.html
+
 	# add header to response to specifiy server 01
 	add_header X-Served-By 123-web-01;
 
@@ -33,17 +37,12 @@ server {
 
 	# main root of website
 	location / {
-		 root /usr/share/nginx/html;
 		 try_files $uri $uri/ =404;
 		 include /etc/nginx/mime.types;
-		 index index.html;
-		 # Uncomment to enable naxsi on this location
-		 # include /etc/nginx/naxsi.rules
 	}
 
 	# web static basic configuration
 	location /hbnb_static {
-		 alias /data/web_static/current/;
 		 index 103-index.html;
 		 include /etc/nginx/mime.types;
 	}

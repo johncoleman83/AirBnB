@@ -38,6 +38,8 @@ HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db \
 ## Environment
 
 * __OS:__ Linux Ubuntu 14.04 LTS
+* __firewall:__ ufw 0.35
+* __SSL Cert:__ Let's Encrypt [certbot 0.19.0](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04)
 * __languages:__ Python 3.4.3, Javascript, HTML, CSS
 * __web server:__ nginx/1.4.6
 * __application server:__ Flask==0.12.2, Jinja2==2.9.6
