@@ -25,3 +25,9 @@ header {
 .available {
     background-color: #ff545f !important;
 }
+
+@media screen and (max-width: 600px) {
+    header {
+	background-position: 0px 50%;
+    }
+}

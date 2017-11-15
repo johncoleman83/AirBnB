@@ -145,11 +145,7 @@ class LogoutAPI(MethodView):
             }
             return make_response(jsonify(responseObject)), 200
         except Exception as e:
-            responseObject = {
-                'status': 'fail',
-                'message': e
-            }
-            return abort(400, e)
+            abort(400, e)
 
 
 auth_blueprint.add_url_rule(

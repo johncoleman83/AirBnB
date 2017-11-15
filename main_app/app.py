@@ -44,10 +44,14 @@ def main_index(the_id=None):
         headers = {
             'content-type': 'application/json'
         }
-        if request.form.get('action') == 'login':
+        action = request.form.get('action')
+        if action == 'login':
             url = 'http://0.0.0.0:5001/auth/login'
-        else:
+        elif action == 'signup':
             url = 'http://0.0.0.0:5001/auth/register'
+        else:
+            auth_token = request.form.get('logout')
+            return logout(None, auth_token)
         r = requests.post(url, headers=headers, data=json.dumps(payload))
         r_data = r.json()
         if r_data.get('error'):
@@ -67,7 +71,7 @@ def main_index(the_id=None):
 
 
 @app.route('/logout', methods=['POST'])
-def logout(the_id=None):
+def logout(the_id=None, auth_token=None):
     """
     handles request to main index, currently a login page
     """
