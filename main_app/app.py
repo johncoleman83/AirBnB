@@ -77,11 +77,14 @@ def main_index():
                                amens=amens, auth_token=auth_token)
 
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['GET', 'POST'])
 def logout(auth_token=None):
     """
     handles request to main index, currently a login page
     """
+    if request.method == 'GET':
+        cache_id =uuid4()
+        return render_template('404.html', cache_id=cache_id), 404
     cache_id = uuid4()
     if auth_token is None:
         auth_token = request.form.get('logout')
