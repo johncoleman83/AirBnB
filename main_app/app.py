@@ -12,7 +12,7 @@ from uuid import uuid4
 # flask setup
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-port = 5000
+port = 8000
 host = '0.0.0.0'
 
 
@@ -27,12 +27,12 @@ def teardown_db(exception):
 
 
 @app.route('/', methods=['GET', 'POST'])
-def main_index(the_id=None):
+def main_index():
     """
     handles request to main index, currently a login page
     """
+    cache_id = uuid4()
     if request.method == 'GET':
-        cache_id = uuid4()
         return render_template('index.html', cache_id=cache_id, message=None)
     if request.method == 'POST':
         email = request.form.get('email', None)
@@ -51,31 +51,40 @@ def main_index(the_id=None):
             url = 'http://0.0.0.0:5001/auth/register'
         else:
             auth_token = request.form.get('logout')
-            return logout(None, auth_token)
-        r = requests.post(url, headers=headers, data=json.dumps(payload))
+            return logout(auth_token)
+        r = requests.post(url, headers=headers,
+                          data=json.dumps(payload))
         r_data = r.json()
         if r_data.get('error'):
-            return render_template('index.html', message=r_data.get('error'))
+            return render_template('index.html',
+                                   cache_id=cache_id,
+                                   message=r_data.get('error'))
         auth_token = r_data.get('auth_token')
         if auth_token is None:
-            return render_template('index.html', message=r_data.get('error'))
+            return render_template('index.html',
+                                   cache_id=cache_id,
+                                   message=r_data.get('error'))
         if 'register' in url:
             signup_message = 'thank you for signing up'
-            return render_template('index.html', message=signup_message)
+            return render_template('index.html',
+                                   cache_id=cache_id,
+                                   message=signup_message)
         state_objs = storage.all('State').values()
         states = dict([state.name, state] for state in state_objs)
         amens = list(storage.all('Amenity').values())
         cache_id = uuid4()
-        return render_template('places.html', states=states, amens=amens,
-                               cache_id=cache_id, auth_token=auth_token)
+        return render_template('places.html', cache_id=cache_id, states=states,
+                               amens=amens, auth_token=auth_token)
 
 
 @app.route('/logout', methods=['POST'])
-def logout(the_id=None, auth_token=None):
+def logout(auth_token=None):
     """
     handles request to main index, currently a login page
     """
-    auth_token = request.form.get('logout')
+    cache_id = uuid4()
+    if auth_token is None:
+        auth_token = request.form.get('logout')
     headers = {
         'content-type': 'application/json',
         'Authorization': 'Bearer {}'.format(auth_token)
@@ -84,10 +93,14 @@ def logout(the_id=None, auth_token=None):
     r = requests.post(url, headers=headers)
     r_data = r.json()
     if r_data.get('error'):
-        return render_template('index.html', message=r_data.get('error'))
+        return render_template('index.html',
+                               cache_id=cach_id,
+                               message=r_data.get('error'))
     message = 'You are now logged out.'
     cache_id = uuid4()
-    return render_template('index.html', cache_id=cache_id, message=message)
+    return render_template('index.html',
+                           cache_id=cache_id,
+                           message=message)
 
 
 @app.errorhandler(404)
