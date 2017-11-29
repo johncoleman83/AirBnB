@@ -20,10 +20,15 @@ html {
 
 body {
     margin: 0;
-    padding: 5%;
+    padding: .5%;
+}
+
+ul {
+    margin: 10px;
 }
 
 section {
+    max-width: 40%;
     margin: 2%;
 }
 
@@ -38,8 +43,16 @@ h3 {
 }
 
 img {
-    box-shadow: 0 0 3px 3px #070707;
     margin: 0 auto 0 auto;
+}
+
+.large-image {
+    width: 25%;
+}
+
+.refuge-wall {
+    width: 85%;
+    box-shadow: 0 0 3px 2px #505050;
 }
 
 body {

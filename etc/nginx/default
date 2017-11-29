@@ -67,6 +67,13 @@ server {
 		 proxy_pass http://127.0.0.1:8001;
 	}
 
+	# gunicorn configuration for Amazon web app
+	location /amazon/ {
+		 include proxy_params;
+		 rewrite ^/amazon(.*)$ /$1 break;
+		 proxy_pass http://127.0.0.1:8002;
+	}
+
 	# gunicorn configuration for API Swagger (flasgger) DOCS
 	location /api/ {
 		 include proxy_params;

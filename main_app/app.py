@@ -51,7 +51,7 @@ def main_index():
             url = 'http://0.0.0.0:5001/auth/register'
         else:
             auth_token = request.form.get('logout')
-            return logout(auth_token)
+            return logout(auth_token=auth_token)
         r = requests.post(url, headers=headers,
                           data=json.dumps(payload))
         r_data = r.json()
