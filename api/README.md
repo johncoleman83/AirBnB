@@ -6,7 +6,7 @@ This Directory contains API files and documenation
 
 ## Environment
 
-* __OS:__ Ubuntu 14.04 LTS
+* __OS:__ Linux Ubuntu 16.04.03 LTS (xenial)
 * __language:__ Python 3.4.3
 * __application server:__ Flask 0.12.2, Jinja2 2.9.6
 * __web server gateway:__ gunicorn (version 19.7.1)

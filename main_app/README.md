@@ -8,7 +8,7 @@ Interface (WSGI).
 
 ## Environment
 
-* __OS:__ Ubuntu 14.04 LTS
+* __OS:__ Linux Ubuntu 16.04.3 LTS (xenial)
 * __language:__ Python 3.4.3
 * __application server:__ Flask 0.12.2, Jinja2 2.9.6
 * __database:__ mysql Ver 14.14 Distrib 5.7.18
