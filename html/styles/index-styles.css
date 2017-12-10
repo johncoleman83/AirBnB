@@ -63,10 +63,19 @@ body {
 
 @media screen and (max-width: 600px) {
 
+    .large-image {
+	min-width: 50%;
+    }
+
+    .make_cols {
+	padding: 0 10%;
+    }
+
     img {
 	width: 100%;
     }
     section {
+	min-width: 400px;
 	width: 100%;
 	margin: 1%;
     }
