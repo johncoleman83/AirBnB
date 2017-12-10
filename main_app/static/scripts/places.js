@@ -3,10 +3,11 @@ const checkedStates = {};
 const checkedCities = {};
 const remotehost = 'https://www.cecinestpasun.site';
 const localhost = 'http://0.0.0.0:5001';
-var domain = localhost;
+var domain = remotehost;
 const notFound = [
   '<h2 id="no_places_found">No places found :(</h2>',
-  '<img src="static/images/guillaume.jpeg">'
+  '<p>please limit your results, the data is dummy data from custom mysql DB it is not from AirBnB API</p>',
+  '<img src="static/images/refuge-wall.gif">'
 ];
 
 function checkStatus () {
