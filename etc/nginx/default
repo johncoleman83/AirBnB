@@ -3,6 +3,12 @@
 # Directives: http://nginx.org/en/docs/dirindex.html
 # Regex: https://www.regextester.com/pregsyntax.html
 
+# You may add here your
+# server {
+#	...
+# }
+# statements for each of your virtual hosts to this file
+
 ##
 # You should look at the following URL's in order to grasp a solid understanding
 # of Nginx configuration files in order to fully unleash the power of Nginx.
@@ -21,14 +27,14 @@ server {
 	listen [::]:80 default_server ipv6only=on;
 
 	# Make site accessible from http://localhost/
-	server_name localhost;
+	server_name cecinestpasun.site www.cecinestpasun.site;
 
 	# main root
 	root /usr/share/nginx/html;
-	index index.html
+	index index.html;
 
 	# add header to response to specifiy server 01
-	add_header X-Served-By 123-web-01;
+	add_header X-Served-By AWS-server-1;
 
 	# rewrite request_uri for fix with odd_even response codes
 	if ($request_uri ~ ^/airbnb-dynamic/[\d+]) {
@@ -41,12 +47,6 @@ server {
 		 include /etc/nginx/mime.types;
 	}
 
-	# web static basic configuration
-	location /hbnb_static {
-		 index 103-index.html;
-		 include /etc/nginx/mime.types;
-	}
-
 	# config for static for full dynamic integration with mysql DB
 	location /static/ {
 		  include proxy_params;
@@ -56,7 +56,7 @@ server {
 	# gunicorn configuration for fully dynamic with mysql DB
 	location /hbnb/ {
 		 include proxy_params;
-		 rewrite ^/hbnb(.*)$ /$1 break;
+		 rewrite ^/hbnb/(.*)$ /$1 break;
 		 proxy_pass http://127.0.0.1:8000;
 	}
 
@@ -65,6 +65,13 @@ server {
 		 include proxy_params;
 		 rewrite ^/nautilus(.*)$ /$1 break;
 		 proxy_pass http://127.0.0.1:8001;
+	}
+
+	# gunicorn configuration for Nautilus web app
+	location /todo/ {
+		 include proxy_params;
+		 rewrite ^/todo/(.*)$ /$1 break;
+		 proxy_pass http://127.0.0.1:8003;
 	}
 
 	# gunicorn configuration for Amazon web app
@@ -117,4 +124,12 @@ server {
 	ssl_certificate_key /etc/letsencrypt/live/cecinestpasun.site/privkey.pem; # managed by Certbot
 	include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
 	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+
+    # Redirect non-https traffic to https
+    # if ($scheme != "https") {
+    #     return 301 https://$host$request_uri;
+    # } # managed by Certbot
+
 }
