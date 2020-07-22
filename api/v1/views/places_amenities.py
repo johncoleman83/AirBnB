@@ -6,7 +6,7 @@ from api.v1.views import app_views
 from flask import abort, jsonify, request
 from models import storage, CNC
 from os import environ
-STORAGE_TYPE = environ.get('HBNB_TYPE_STORAGE')
+STORAGE_TYPE = environ.get('BTCPBNB_TYPE_STORAGE')
 
 
 @app_views.route('/places/<place_id>/amenities', methods=['GET'])

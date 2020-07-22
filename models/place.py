@@ -8,7 +8,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, Float, ForeignKey,\
     MetaData, Table, ForeignKey
 from sqlalchemy.orm import backref
-STORAGE_TYPE = os.environ.get('HBNB_TYPE_STORAGE')
+STORAGE_TYPE = os.environ.get('BTCPBNB_TYPE_STORAGE')
 
 if STORAGE_TYPE == "db":
     class PlaceAmenity(Base):

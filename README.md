@@ -1,4 +1,4 @@
-<img src="https://github.com/jarehec/AirBnB_clone_v3/blob/master/dev/HBTN-hbnb-Final.png" width="160" height=auto />
+<img src="https://github.com/jarehec/AirBnB_clone_v3/blob/master/dev/BTCP-btcpbnb-Final.png" width="160" height=auto />
 
 # AirBnB Clone
 
@@ -30,8 +30,8 @@ storage engine models:
   command:
 
 ```
-$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd \
-HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db \
+$ BTCPBNB_MYSQL_USER=btcpbnb_dev BTCPBNB_MYSQL_PWD=btcpbnb_dev_pwd \
+BTCPBNB_MYSQL_HOST=localhost BTCPBNB_MYSQL_DB=btcpbnb_dev_db BTCPBNB_TYPE_STORAGE=db \
 [COMMAND HERE (example: python3 -m main_app.app)]
 ```
 
@@ -53,7 +53,7 @@ HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db \
   * __bash:__ ShellCheck 0.3.3
   * __JavaScript:__ semistandard 11.0.0
 
-<img src="https://github.com/jarehec/AirBnB_clone_v3/blob/master/dev/hbnb_step5.png" />
+<img src="https://github.com/jarehec/AirBnB_clone_v3/blob/master/dev/btcpbnb_step5.png" />
 
 ## Configuration Files
 
@@ -99,7 +99,7 @@ the database.
   the other function to deploy the compressed web static files.  Command must
   be executed from the `AirBnB_clone` root directory.
 
-  * Usage: `$ fab -f 3-deploy_web_static.py deploy -i ~/.ssh/holberton -u ubuntu`
+  * Usage: `$ fab -f 3-deploy_web_static.py deploy -i ~/.ssh/bootcamp -u ubuntu`
 
 ## Testing
 
@@ -115,8 +115,8 @@ All unittests are in the `./tests` directory with the command:
 * DataBase Storage Engine Model
 
 ```
-$ HBNB_MYSQL_USER=hbnb_test HBNB_MYSQL_PWD=hbnb_test_pwd \
-HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db \
+$ BTCPBNB_MYSQL_USER=btcpbnb_test BTCPBNB_MYSQL_PWD=btcpbnb_test_pwd \
+BTCPBNB_MYSQL_HOST=localhost BTCPBNB_MYSQL_DB=btcpbnb_test_db BTCPBNB_TYPE_STORAGE=db \
 python3 -m unittest discover -v ./tests/
 ```
 
@@ -157,27 +157,27 @@ $ ./console.py
 #### To execute the CLI using the Database Storage Engine Model:
 
 ```
-$ HBNB_MYSQL_USER=hbnb_test HBNB_MYSQL_PWD=hbnb_test_pwd \
-HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db \
+$ BTCPBNB_MYSQL_USER=btcpbnb_test BTCPBNB_MYSQL_PWD=btcpbnb_test_pwd \
+BTCPBNB_MYSQL_HOST=localhost BTCPBNB_MYSQL_DB=btcpbnb_test_db BTCPBNB_TYPE_STORAGE=db \
 ./console.py
 ```
 
 #### For a detailed description of all tests, run these commands in the CLI:
 
 ```
-(hbnb) help help
+(btcpbnb) help help
 List available commands with "help" or detailed help with "help cmd".
-(hbnb) help
+(btcpbnb) help
 
 Documented commands (type help <topic>):
 ========================================
 Amenity    City  Place   State  airbnb  create   help  show
 BaseModel  EOF   Review  User   all     destroy  quit  update
 
-(hbnb) help User
+(btcpbnb) help User
 class method with .function() syntax
         Usage: User.<command>(<id>)
-(hbnb) help create
+(btcpbnb) help create
 create: create [ARG] [PARAM 1] [PARAM 2] ...
         ARG = Class Name
         PARAM = <key name>=<value>

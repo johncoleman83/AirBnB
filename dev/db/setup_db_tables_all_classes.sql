@@ -1,14 +1,14 @@
--- creates MySQL database hbnb_dev_db only if not existing
--- and gives privileges to user hbnb_dev on 2 DB's
-CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
-GRANT ALL PRIVILEGES ON hbnb_dev_db.*
-      TO hbnb_dev@localhost
-      IDENTIFIED BY 'hbnb_dev_pwd';
+-- creates MySQL database btcpbnb_dev_db only if not existing
+-- and gives privileges to user btcpbnb_dev on 2 DB's
+CREATE DATABASE IF NOT EXISTS btcpbnb_dev_db;
+GRANT ALL PRIVILEGES ON btcpbnb_dev_db.*
+      TO btcpbnb_dev@localhost
+      IDENTIFIED BY 'btcpbnb_dev_pwd';
 GRANT SELECT ON performance_schema.*
-      TO hbnb_dev@localhost
-      IDENTIFIED BY 'hbnb_dev_pwd';
+      TO btcpbnb_dev@localhost
+      IDENTIFIED BY 'btcpbnb_dev_pwd';
 -- additions to attempt to pass last assignment
-USE hbnb_dev_db;
+USE btcpbnb_dev_db;
 CREATE TABLE states
        (id varchar(60) NOT NULL UNIQUE,
        created_at DATETIME(6),

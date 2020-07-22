@@ -9,11 +9,11 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 from models import base_model, amenity, city, place, review, state, user
 
-HBUSER = os.environ.get('HBNB_MYSQL_USER')
-HBPW = os.environ.get('HBNB_MYSQL_PWD')
-HBHOST = os.environ.get('HBNB_MYSQL_HOST')
-HBDB = os.environ.get('HBNB_MYSQL_DB')
-HBENV = os.environ.get("HBNB_ENV")
+HBUSER = os.environ.get('BTCPBNB_MYSQL_USER')
+HBPW = os.environ.get('BTCPBNB_MYSQL_PWD')
+HBHOST = os.environ.get('BTCPBNB_MYSQL_HOST')
+HBDB = os.environ.get('BTCPBNB_MYSQL_DB')
+HBENV = os.environ.get("BTCPBNB_ENV")
 
 
 class DBStorage:

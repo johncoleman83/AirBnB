@@ -6,11 +6,11 @@
 # remove and restore database
 
 pep8 . && python3 -m unittest discover -v ./tests/ \
-    && HBNB_MYSQL_USER=hbnb_dev \
-		      HBNB_MYSQL_PWD=hbnb_dev_pwd \
-		      HBNB_MYSQL_HOST=localhost \
-		      HBNB_MYSQL_DB=hbnb_dev_db \
-		      HBNB_TYPE_STORAGE=db \
+    && BTCPBNB_MYSQL_USER=btcpbnb_dev \
+		      BTCPBNB_MYSQL_PWD=btcpbnb_dev_pwd \
+		      BTCPBNB_MYSQL_HOST=localhost \
+		      BTCPBNB_MYSQL_DB=btcpbnb_dev_db \
+		      BTCPBNB_TYPE_STORAGE=db \
 		      python3 -m unittest discover -v ./tests/ \
     && ./dev/w3c_validator.py \
         $(find ./web_static -maxdepth 1 -name "*.html" -type f ! -name "4*") \

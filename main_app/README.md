@@ -17,15 +17,15 @@ Interface (WSGI).
 
 ## Tests
 
-* Test complete integation with files AirBnB HTML: `0-hbnb.py`.  Execute
+* Test complete integation with files AirBnB HTML: `0-btcpbnb.py`.  Execute
   from root directory (`AirBnB_clone`) with all the necessary environmental
   variables to establish the database storage model:
 
 ```
 $ cat 100-dump.sql | mysql -uroot -p
-$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd \
-HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db \
-HBNB_TYPE_STORAGE=db python3 -m web_dynamic.0-hbnb
+$ BTCPBNB_MYSQL_USER=btcpbnb_dev BTCPBNB_MYSQL_PWD=btcpbnb_dev_pwd \
+BTCPBNB_MYSQL_HOST=localhost BTCPBNB_MYSQL_DB=btcpbnb_dev_db \
+BTCPBNB_TYPE_STORAGE=db python3 -m web_dynamic.0-btcpbnb
 ```
 
 ## License

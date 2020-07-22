@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.8-rc, for Linux (x86_64)
 --
--- Host: localhost    Database: hbnb_dev_db
+-- Host: localhost    Database: btcpbnb_dev_db
 -- ------------------------------------------------------
 -- Server version	5.7.8-rc
 
@@ -16,17 +16,17 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- Drop database
-DROP DATABASE IF EXISTS hbnb_dev_db;
+DROP DATABASE IF EXISTS btcpbnb_dev_db;
 
 -- Create database + user if doesn't exist
-CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
-CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost';
-SET PASSWORD FOR 'hbnb_dev'@'localhost' = 'hbnb_dev_pwd';
-GRANT ALL ON hbnb_dev_db.* TO 'hbnb_dev'@'localhost';
-GRANT SELECT ON performance_schema.* TO 'hbnb_dev'@'localhost';
+CREATE DATABASE IF NOT EXISTS btcpbnb_dev_db;
+CREATE USER IF NOT EXISTS 'btcpbnb_dev'@'localhost';
+SET PASSWORD FOR 'btcpbnb_dev'@'localhost' = 'btcpbnb_dev_pwd';
+GRANT ALL ON btcpbnb_dev_db.* TO 'btcpbnb_dev'@'localhost';
+GRANT SELECT ON performance_schema.* TO 'btcpbnb_dev'@'localhost';
 FLUSH PRIVILEGES;
 
-USE hbnb_dev_db;
+USE btcpbnb_dev_db;
 
 --
 -- Table structure for table `amenities`

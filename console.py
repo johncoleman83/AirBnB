@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 """
-Command interpreter for Holberton AirBnB project
+Command interpreter for Bootcamp AirBnB project
 """
 import cmd
 from models import storage, CNC
 
 
-class HBNBCommand(cmd.Cmd):
+class BTCPBNBCommand(cmd.Cmd):
     """
     Command inerpreter class
     """
-    prompt = '(hbnb) '
+    prompt = '(btcpbnb) '
     ERR = [
         '** class name missing **',
         '** class doesn\'t exist **',
@@ -25,7 +25,7 @@ class HBNBCommand(cmd.Cmd):
         handles intro to command interpreter
         """
         print('.----------------------------.')
-        print('|    Welcome to hbnb CLI!    |')
+        print('|    Welcome to btcpbnb CLI!    |')
         print('|   for help, input \'help\'   |')
         print('|   for quit, input \'quit\'   |')
         print('.----------------------------.')
@@ -57,13 +57,13 @@ class HBNBCommand(cmd.Cmd):
         """
         error = 0
         if len(arg) == 0:
-            print(HBNBCommand.ERR[0])
+            print(BTCPBNBCommand.ERR[0])
             error = 1
         else:
             if isinstance(arg, list):
                 arg = arg[0]
             if arg not in CNC.keys():
-                print(HBNBCommand.ERR[1])
+                print(BTCPBNBCommand.ERR[1])
                 error = 1
         return error
 
@@ -74,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
         error = 0
         if (len(arg) < 2):
             error += 1
-            print(HBNBCommand.ERR[2])
+            print(BTCPBNBCommand.ERR[2])
         if not error:
             storage_objs = storage.all()
             for key, value in storage_objs.items():
@@ -82,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
                 if temp_id == arg[1] and arg[0] in key:
                     return error
             error += 1
-            print(HBNBCommand.ERR[3])
+            print(BTCPBNBCommand.ERR[3])
         return error
 
     def do_airbnb(self, arg):
@@ -92,10 +92,10 @@ class HBNBCommand(cmd.Cmd):
         print("    _     _  _ _||\ |/  \ | _  _  _|_|_     _  _ _| ")
         print("|_||_)\)/(_|| (_|| \|\__/ || )(_)| |_| )\)/(_|| (_| ")
         print("   |                                                ")
-        if HBNBCommand.prompt == '(hbnb) ':
-            HBNBCommand.prompt = " /_ /_ _  /_\n/ //_// //_/ "
+        if BTCPBNBCommand.prompt == '(btcpbnb) ':
+            BTCPBNBCommand.prompt = " /_ /_ _  /_\n/ //_// //_/ "
         else:
-            HBNBCommand.prompt = '(hbnb) '
+            BTCPBNBCommand.prompt = '(btcpbnb) '
         arg = arg.split()
         error = self.__class_err(arg)
 
@@ -275,9 +275,9 @@ class HBNBCommand(cmd.Cmd):
             if arg[1] in k and arg[0] in k:
                 key = k
         if len(arg) < 3:
-            print(HBNBCommand.ERR[4])
+            print(BTCPBNBCommand.ERR[4])
         elif len(arg) < 4:
-            print(HBNBCommand.ERR[5])
+            print(BTCPBNBCommand.ERR[5])
         else:
             return [1, arg, d, storage_objs, key]
         return [0]
@@ -382,4 +382,4 @@ if __name__ == '__main__':
     """
     MAIN Loop
     """
-    HBNBCommand().cmdloop()
+    BTCPBNBCommand().cmdloop()

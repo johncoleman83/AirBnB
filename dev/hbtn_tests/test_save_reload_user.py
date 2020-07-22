@@ -13,8 +13,8 @@ for obj_id in all_objs.keys():
 print("-- Begin Create a new User --")
 my_user = User()
 my_user.first_name = "Betty"
-my_user.last_name = "Holberton"
-my_user.email = "airbnb@holbertonshool.com"
+my_user.last_name = "Bootcamp"
+my_user.email = "airbnb@bootcampshool.com"
 my_user.password = "root"
 my_user.save()
 an_bm = BaseModel()

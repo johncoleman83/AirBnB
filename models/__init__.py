@@ -11,7 +11,7 @@ from models import authentication_secret
 
 """CNC - dictionary = { Class Name (string) : Class Type }"""
 
-if os.environ.get('HBNB_TYPE_STORAGE') == 'db':
+if os.environ.get('BTCPBNB_TYPE_STORAGE') == 'db':
     from models.engine import db_storage
     CNC = db_storage.DBStorage.CNC
     storage = db_storage.DBStorage()

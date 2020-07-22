@@ -7,7 +7,7 @@ from flask import abort, jsonify, request
 from flasgger.utils import swag_from
 from models import CNC, storage, User
 from os import environ
-STORAGE_TYPE = environ.get('HBNB_TYPE_STORAGE')
+STORAGE_TYPE = environ.get('BTCPBNB_TYPE_STORAGE')
 
 
 @swag_from('swagger_yaml/places_by_city.yml', methods=['GET', 'POST'])

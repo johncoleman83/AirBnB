@@ -23,8 +23,8 @@ def teardown_db(exception):
     storage.close()
 
 
-@app.route('/hbnb')
-def hbnb_filters(the_id=None):
+@app.route('/btcpbnb')
+def btcpbnb_filters(the_id=None):
     """
     handles request to custom template with states, cities & amentities
     """
@@ -34,7 +34,7 @@ def hbnb_filters(the_id=None):
     places = storage.all('Place').values()
     users = dict([user.id, "{} {}".format(user.first_name, user.last_name)]
                  for user in storage.all('User').values())
-    return render_template('100-hbnb.html',
+    return render_template('100-btcpbnb.html',
                            states=states,
                            amens=amens,
                            places=places,
