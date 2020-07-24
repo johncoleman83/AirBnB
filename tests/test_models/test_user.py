@@ -128,12 +128,12 @@ class TestUserInstances(unittest.TestCase):
 
     def test_email_attribute(self):
         """... add email attribute"""
-        self.user.email = "bettybootcamp@gmail.com"
+        self.user.email = "namesakebootcamp@gmail.com"
         if hasattr(self.user, 'email'):
             actual = self.user.email
         else:
             actual = ''
-        expected = "bettybootcamp@gmail.com"
+        expected = "namesakebootcamp@gmail.com"
         self.assertEqual(expected, actual)
 
 if __name__ == '__main__':

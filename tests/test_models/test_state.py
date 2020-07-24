@@ -128,12 +128,12 @@ class TestStateInstances(unittest.TestCase):
 
     def test_name_attribute(self):
         """... add name attribute"""
-        self.state.name = "betty"
+        self.state.name = "namesake"
         if hasattr(self.state, 'name'):
             actual = self.state.name
         else:
             acual = ''
-        expected = "betty"
+        expected = "namesake"
         self.assertEqual(expected, actual)
 
 if __name__ == '__main__':

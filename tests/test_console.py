@@ -208,7 +208,7 @@ class TestBTCPBNBcmdCreateDB(unittest.TestCase):
         cls.test_state_id = std_out.getvalue()[:-1]
         with redirect_streams() as (std_out, std_err):
             CLI.do_create('User '
-                          'email="bettybootcamp@gmail.com" '
+                          'email="namesakebootcamp@gmail.com" '
                           'password="apass" '
                           'first_name="a_name" '
                           'last_name="a_last_name" ')
